@@ -1,0 +1,139 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.231.6/containers/docker-existing-docker-compose
+// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
+{
+    "name": "my-simple-project",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "args": {
+        "VARIANT": "7",
+        "INSTALL_NODE": "true",
+        "NODE_VERSION": "lts/*"
+      }
+    },
+	// The 'se*rvice' property is the name of the service for the container that VS Code should
+	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+	// "service": "php8-sf6",
+
+	// The optional 'workspaceFolder' property is the path VS Code should open by default when
+	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
+	
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+        "files.associations": {
+            "*.html": "twig"
+        },
+        "emmet.includeLanguages": {
+            "twig": "html"
+        },
+		"attrsSorter.order": [
+            "is",
+            "v-for",
+            "v-if",
+            "v-else-if",
+            "v-else",
+            "v-show",
+            "v-cloak",
+            "v-once",
+            "v-pre",
+            "id",
+            "ref",
+            "key",
+            "v-slot",
+            "v-slot.+",
+            "#.*",
+            "slot",
+            "v-model",
+            "v-model.+",
+            "v-bind",
+            "v-bind.+",
+            ":.+",
+            "v-text",
+            "v-text.+",
+            "v-html",
+            "v-html.+",
+            "class",
+            "v-on.+",
+            "@.+",
+            "name",
+            "data-.+",
+            "ng-.+",
+            "src",
+            "for",
+            "type",
+            "href",
+            "values",
+            "title",
+            "alt",
+            "role",
+            "aria-.+",
+            "$unknown$"
+        ],
+        "css.validate": false,
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": false
+        },
+        "less.validate": false,
+        "php.suggest.basic": false,
+        "vetur.format.defaultFormatter.html": "prettyhtml",
+        "vetur.format.defaultFormatter.js": "prettier-eslint",
+        "scss.validate": false,
+        "stylelint.validate": [
+            "css",
+            "html",
+            "markdown",
+            "postcss",
+            "sass",
+            "scss",
+            "xml",
+            "xsl"
+        ],
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+            "zsh": {
+                "path": "zsh",
+              
+            }
+        },
+        "todohighlight.isEnable": true,
+        "todohighlight.include": [
+            "**/*.js",
+            "**/*.jsx",
+            "**/*.ts",
+            "**/*.tsx",
+            "**/*.html",
+            "**/*.php",
+            "**/*.css",
+            "**/*.sass",
+            "**/*.scss",
+            "**/*.vue"
+        ]
+    },
+	
+	
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+        "YoanBernabeu.yoandevpack",
+		"bierner.emojisense",
+		"cweijan.vscode-mysql-client2"
+
+    ]
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line if you want start specific services in your Docker Compose config.
+	// "runServices": [],
+
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
+
+	// Uncomment the next line to run commands after the container is created - for example installing curl.
+	// "postCreateCommand": "apt-get update && apt-get install -y curl",
+
+	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+}

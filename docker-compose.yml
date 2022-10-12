@@ -1,0 +1,71 @@
+version: '3.7'
+services:
+    php8-sf6:
+        container_name: php8-sf6
+        build: php8-sf6
+        ports:
+            - "9900:8000"
+        volumes:
+            - ./project:/var/www/html
+        networks:
+            - npm-nw
+
+    mailer:
+        image: schickling/mailcatcher
+        ports: [ 1025, 1080 ]
+
+    database:
+        image: postgres:13-alpine
+        environment:
+            POSTGRES_DB: app
+            POSTGRES_PASSWORD: ChangeMe
+            POSTGRES_USER: symfony
+        ports:
+            - '6632:5432'
+        volumes:
+            - db-data:/var/lib/postgresql/data:rw
+        networks:
+            - npm-nw
+
+    mysql:
+
+        image: mysql:8.0
+
+        environment:
+            MYSQL_USER: admin
+            MYSQL_ROOT_PASSWORD: admin
+            MYSQL_DATABASE: symfony6
+
+        ports:
+
+            - 6603:3306
+
+        volumes:
+
+            - mysql:/var/lib/mysql:rw
+        networks:
+            - npm-nw
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        links:
+            - mysql
+        ports:
+
+            - 8090:80
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: unless-stopped
+
+volumes:
+    db-data:
+        driver: local
+
+    mysql:
+        driver: local
+networks:
+
+    npm-nw:
+        external: true
