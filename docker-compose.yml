@@ -14,8 +14,6 @@ services:
  mariadb:
     image: linuxserver/mariadb:latest
     restart: unless-stopped
-    env_file:
-      - environment.yml
     ports:
       - 3306:3306
     volumes:
