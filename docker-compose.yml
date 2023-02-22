@@ -19,10 +19,6 @@ services:
     volumes:
       - ./mariadb/:/config
 
-volumes:
-    db-data:
-        driver: local
-
 networks:
 
     npm-nw:
