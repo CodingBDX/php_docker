@@ -9,15 +9,17 @@ services:
             - ./project:/var/www/html
         networks:
             - npm-nw
-mariadb:
-   image: linuxserver/mariadb:latest
-   restart: unless-stopped
-  
-   ports:
-     - 3306:3306
-   volumes:
-     - ./mariadb/:/config
-   
+
+
+ mariadb:
+    image: linuxserver/mariadb:latest
+    restart: unless-stopped
+    env_file:
+      - environment.yml
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mariadb/:/config
 
 volumes:
     db-data:
