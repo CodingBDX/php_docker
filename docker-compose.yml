@@ -9,31 +9,15 @@ services:
             - ./project:/var/www/html
         networks:
             - npm-nw
-
-   
-
- ftp:
-    build:
-      dockerfile: Dockerfile
-      context: ftp/
-    volumes:
-      - "./html/users/:/ftp/"
-      - "./ftp/users/:/ftp_users/"
-      - "./ftp/default_data/:/default_data/"
-    restart: unless-stopped
-    network_mode: "host"
-    env_file:
-      - environment.yml
-
-  mariadb:
-    image: linuxserver/mariadb:latest
-    restart: unless-stopped
-    env_file:
-      - environment.yml
-    ports:
-      - 3306:3306
-    volumes:
-      - ./mariadb/:/config
+mariadb:
+   image: linuxserver/mariadb:latest
+   restart: unless-stopped
+   env_file:
+     - environment.yml
+   ports:
+     - 3306:3306
+   volumes:
+     - ./mariadb/:/config
    
 
 volumes:
