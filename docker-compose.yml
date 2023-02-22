@@ -12,34 +12,35 @@ services:
 
    
 
-    
+ ftp:
+    build:
+      dockerfile: Dockerfile
+      context: ftp/
+    volumes:
+      - "./html/users/:/ftp/"
+      - "./ftp/users/:/ftp_users/"
+      - "./ftp/default_data/:/default_data/"
+    restart: unless-stopped
+    network_mode: "host"
+    env_file:
+      - environment.yml
 
-    mysql:
-
-        image: mysql:8.0
-
-        environment:
-            MYSQL_USER: admin
-            MYSQL_ROOT_PASSWORD: admin
-            MYSQL_DATABASE: symfony6
-
-        ports:
-
-            - 6603:3306
-
-        volumes:
-
-            - mysql:/var/lib/mysql:rw
-        networks:
-            - npm-nw
-
+  mariadb:
+    image: linuxserver/mariadb:latest
+    restart: unless-stopped
+    env_file:
+      - environment.yml
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mariadb/:/config
    
 
 volumes:
     db-data:
         driver: local
 
-    mysql:
+    mariadb:
         driver: local
 networks:
 
