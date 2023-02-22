@@ -24,8 +24,6 @@ volumes:
     db-data:
         driver: local
 
-    mariadb:
-        driver: local
 networks:
 
     npm-nw:
