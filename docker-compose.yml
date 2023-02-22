@@ -11,11 +11,11 @@ services:
             - npm-nw
 
 
- mariadb:
-    image: linuxserver/mariadb:latest
-    restart: unless-stopped
-    ports:
-      - 3306:3306
+    mariadb:
+       image: linuxserver/mariadb:latest
+       restart: unless-stopped
+       ports:
+          - 3306:3306
     volumes:
       - ./mariadb/:/config
 
