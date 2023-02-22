@@ -2,9 +2,14 @@ FROM php:8.0.13-cli
 
 RUN apt-get update \
     &&  apt-get install -y --no-install-recommends \
-        locales apt-utils zsh git libicu-dev g++ libpng-dev libxml2-dev libzip-dev libonig-dev libxslt-dev unzip libpq-dev nodejs npm wget \
+        locales apt-utils zsh git libicu-dev  g++ libpng-dev libxml2-dev libzip-dev libonig-dev libxslt-dev unzip libpq-dev nodejs  npm wget \
         apt-transport-https lsb-release ca-certificates
 
+RUN apt-get install -y libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /usr/src/php/ext/imagick; \
+    curl -fsSL https://github.com/Imagick/imagick/archive/06116aa24b76edaf6b1693198f79e6c295eda8a9.tar.gz | tar xvz -C "/usr/src/php/ext/imagick" --strip 1; \
+    docker-php-ext-install imagick;
 # Uses "Spaceship" theme with some customization. Uses some bundled plugins and installs some more from github
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)" -- \
     -t https://github.com/denysdovhan/spaceship-prompt \
@@ -73,6 +78,10 @@ RUN pecl install xdebug
 RUN docker-php-ext-enable xdebug
 
 RUN pecl install apcu && docker-php-ext-enable apcu
+
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+
 
 RUN npm install --global yarn
 
